@@ -62,7 +62,7 @@ def name_search(name, osm_data):
     return poi_id
 
 
-def parse_id(id)
+def parse_id(id):
     """
     Parse id, turn it to dict with only needed keys
     """
