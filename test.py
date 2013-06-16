@@ -7,8 +7,8 @@ from validator import generate_html
 
 class MyTestCase(unittest.TestCase):
     def test_html_generating(self):
-        ideal = 'name', 'tag1', 'tag2', 'tag3'
-        poi1 = {'name': 'poi1', 'tag1': 'value1', 'tag2': 'value2'}
+        ideal = ['name', 'poi'], ['tag1', 'value1'], ['tag2', 'value2'], ['tag3', 'value3']
+        poi1 = {'name': 'poi', 'tag1': 'value1', 'tag2': 'valueX'}
         poi2 = {'name': 'poi2', 'tag1': 'value1', 'tag3': 'value3'}
         poi_list = [poi1, poi2]
         result = generate_html(ideal, poi_list)
@@ -25,15 +25,15 @@ class MyTestCase(unittest.TestCase):
 <th>tag3</th>
 </tr>
 <tr>
-<td>poi1</td>
+<td>poi</td>
 <td>value1</td>
-<td>value2</td>
-<td></td>
+<td><b>valueX</b></td>
+<td><b></b></td>
 </tr>
 <tr>
-<td>poi2</td>
+<td><b>poi2</b></td>
 <td>value1</td>
-<td></td>
+<td><b></b></td>
 <td>value3</td>
 </tr>
 </tbody></table>
@@ -41,6 +41,7 @@ class MyTestCase(unittest.TestCase):
 </html>
 '''
         self.assertEqual(result, needed)
+
 
 
 if __name__ == '__main__':

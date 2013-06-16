@@ -7,7 +7,8 @@ __author__ = 'nedr'
 
 #TODO: rename 'ideal' variable
 #TODO: name search euristics
-#TODO: highlight wrong values (to do this, we need to take ideal values)
+#TODO: web form to get all the data
+#TODO: NodeGetByName method to OsmApi.py or do not use API at all
 
 from lxml import etree
 import lxml.html
@@ -23,14 +24,19 @@ def generate_html(ideal, poi_list):
     for key in ideal:
         # generate header of table which contains all given keys
         th_header = etree.SubElement(tr_header, 'th')
-        th_header.text = key
+        th_header.text = key[0]
 
     for poi in poi_list:
         # generate element tree of poi
         tr = etree.SubElement(tbody, 'tr')
         for key in ideal:
             td = etree.SubElement(tr, 'td')
-            td.text = poi.get(key, '')
+            if key[1] == poi.get(key[0]):
+                td.text = poi.get(key[0], '')
+            else:
+                # if value not equal to ideal, mark it bold
+                b = etree.SubElement(td, 'b')
+                b.text = poi.get(key[0])
 
     html = E.HTML(
         E.HEAD(
@@ -43,5 +49,26 @@ def generate_html(ideal, poi_list):
             )
         )
     )
+
     lxml.html.open_in_browser(html)
     return lxml.html.tostring(html, pretty_print=True)
+
+
+def name_search(name, osm_data):
+    """
+    Search name or similar names in osm_data, returns list of ElementTree objects that's match
+    """
+    poi_id = []
+    return poi_id
+
+
+def parse_id(id)
+    """
+    Parse id, turn it to dict with only needed keys
+    """
+    poi_list = []
+    return poi_list
+
+if __name__ == '__main__':
+    generate_html('bla bla', 'bla bla')
+
