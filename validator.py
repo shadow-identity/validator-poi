@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 That validator search similar named pois and returns table which contains
-highlighted tag values that not similar to most others
+highlighted tag values that does not match the pattern
 """
 __author__ = 'nedr'
 
@@ -15,13 +15,13 @@ import lxml.html
 from lxml.html import builder as E
 
 
-def generate_html(ideal, poi_list):
+def generate_html(pattern, poi_list):
     """
     Generates html with table, filled by poi
     """
     tbody = etree.Element('tbody')
     tr_header = etree.SubElement(tbody, 'tr')
-    for key in ideal:
+    for key in pattern:
         # generate header of table which contains all given keys
         th_header = etree.SubElement(tr_header, 'th')
         th_header.text = key[0]
@@ -29,12 +29,12 @@ def generate_html(ideal, poi_list):
     for poi in poi_list:
         # generate element tree of poi
         tr = etree.SubElement(tbody, 'tr')
-        for key in ideal:
+        for key in pattern:
             td = etree.SubElement(tr, 'td')
             if key[1] == poi.get(key[0]):
                 td.text = poi.get(key[0], '')
             else:
-                # if value not equal to ideal, mark it bold
+                # if value not equal to pattern, mark it bold
                 b = etree.SubElement(td, 'b')
                 b.text = poi.get(key[0])
 
@@ -57,6 +57,12 @@ def generate_html(ideal, poi_list):
 def name_search(name, osm_data):
     """
     Search name or similar names in osm_data, returns list of ElementTree objects that's match
+    1. open
+    2. search name
+        3. get needed tags
+        4. make dict
+    5. make list
+
     """
     poi_id = []
     return poi_id

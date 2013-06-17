@@ -7,11 +7,11 @@ from validator import generate_html
 
 class MyTestCase(unittest.TestCase):
     def test_html_generating(self):
-        ideal = ['name', 'poi'], ['tag1', 'value1'], ['tag2', 'value2'], ['tag3', 'value3']
+        pattern = ['name', 'poi'], ['tag1', 'value1'], ['tag2', 'value2'], ['tag3', 'value3']
         poi1 = {'name': 'poi', 'tag1': 'value1', 'tag2': 'valueX'}
         poi2 = {'name': 'poi2', 'tag1': 'value1', 'tag3': 'value3'}
         poi_list = [poi1, poi2]
-        result = generate_html(ideal, poi_list)
+        result = generate_html(pattern, poi_list)
 
         needed = '''<html>
 <head><title>Table of POI</title></head>
