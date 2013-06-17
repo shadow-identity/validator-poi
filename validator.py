@@ -64,6 +64,17 @@ def name_search(name, osm_data):
     5. make list
 
     """
+    osm_file_name = './map.osm'
+    osm_file = open(osm_file_name, 'r')
+    #osm_map = etree.iterparse(osm_file)
+
+    for event, element in etree.iterparse(osm_file, tag='node'):
+        if len(element.findall('tag')):
+            #if element.findall('tag').
+            #print element.findall('tag').items()
+            for tags in element.findall(u'.//tag[@k="name"][@v="Пятёрочка"]'):
+                print tags.items()
+
     poi_id = []
     return poi_id
 
