@@ -54,7 +54,7 @@ def generate_html(pattern, poi_list):
     return lxml.html.tostring(html, pretty_print=True)
 
 
-def name_search():
+def name_search(pattern):
     """
     Search name or similar names in osm_data, returns list of ElementTree objects that's match
     1. open
@@ -71,8 +71,14 @@ def name_search():
     for event, element in etree.iterparse(osm_file, tag='node'):
         if len(element.findall('tag')):
             for tag in element.findall(u'.//tag[@k="name"][@v="Пятёрочка"]'):
+                # tag - required poi
                 poi = {'id': element.get('id'), tag.get('k'): tag.get('v')}
+                for attribute in pattern:
+                    print 'search: ', attribute[0], tag.get('k'), tag.get('v')
+                    if tag.get('k') == attribute[0]:
+                        poi[attribute[0]] = tag.get('v')
                 print poi
+
 
     poi_id = []
     return poi_id
@@ -85,6 +91,8 @@ def parse_id(id):
     poi_list = []
     return poi_list
 
+pattern = ['name', u'Пятёрочка'], ['shop', 'convenience'], ['tag2', 'value2'], ['tag3', 'value3']
+
 if __name__ == '__main__':
-    name_search()
+    name_search(pattern)
 
