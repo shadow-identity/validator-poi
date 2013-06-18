@@ -54,7 +54,11 @@ def generate_html(pattern, poi_list):
     return lxml.html.tostring(html, pretty_print=True)
 
 
-def name_search(pattern):
+def name_search(pattern=(['name', u'Пятёрочка'],
+                         ['shop', 'convenience'],
+                         ['tag2', 'value2'],
+                         ['tag3', 'value3'])
+                ):
     """
     Search name or similar names in osm_data, returns list of ElementTree objects that's match
     1. open
@@ -66,19 +70,27 @@ def name_search(pattern):
     """
     osm_file_name = './map.osm'
     osm_file = open(osm_file_name, 'r')
-    #osm_map = etree.iterparse(osm_file)
-
-    for event, element in etree.iterparse(osm_file, tag='node'):
+    iteration = 0
+    for _, element in etree.iterparse(osm_file):
+        # element = the osm object (node, line, ...)
+        iteration += 1
+        print iteration
+        if iteration == 8470:
+            pass
+        print element.get('id'), element.tag
         if len(element.findall('tag')):
-            for tag in element.findall(u'.//tag[@k="name"][@v="Пятёрочка"]'):
-                # tag - required poi
-                poi = {'id': element.get('id'), tag.get('k'): tag.get('v')}
-                for attribute in pattern:
-                    print 'search: ', attribute[0], tag.get('k'), tag.get('v')
-                    if tag.get('k') == attribute[0]:
-                        poi[attribute[0]] = tag.get('v')
+            # element has tags - search needed items
+            for key_tag in element.findall(u'.//tag[@k="name"][@v="Пятёрочка"]'):
+                # we find 'tag' - this is required poi.
+                # get his id and children's tags
+                poi = {'id': element.get('id'), key_tag.get('k'): key_tag.get('v')}
+                for tag in element:
+                    # look every tag, get needed (that is in pattern)
+                    for attribute in pattern:
+                        if tag.get('k') == attribute[0]:
+                            poi[attribute[0]] = tag.get('v')
                 print poi
-
+        element.clear()
 
     poi_id = []
     return poi_id
@@ -94,5 +106,5 @@ def parse_id(id):
 pattern = ['name', u'Пятёрочка'], ['shop', 'convenience'], ['tag2', 'value2'], ['tag3', 'value3']
 
 if __name__ == '__main__':
-    name_search(pattern)
+    name_search()
 
