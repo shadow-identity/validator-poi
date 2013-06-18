@@ -1,14 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-That validator search similar named pois and returns table which contains
+That validator search similar named poi's and returns table which contains
 highlighted tag values that does not match the pattern
 """
-__author__ = 'nedr'
 
-#TODO: rename 'ideal' variable
-#TODO: name search euristics
 #TODO: web form to get all the data
-#TODO: NodeGetByName method to OsmApi.py or do not use API at all
 
 from lxml import etree
 import lxml.html
@@ -56,44 +52,43 @@ def generate_html(pattern, poi_list):
 
 def name_search(pattern=(['name', u'Пятёрочка'],
                          ['shop', 'convenience'],
-                         ['tag2', 'value2'],
-                         ['tag3', 'value3'])
+                         ['operator', 'X5 Retail Group'],
+                         ['tag3', 'value3']),
                 ):
+    #TODO: get garbage out, make unit-test
     """
     Search name or similar names in osm_data, returns list of ElementTree objects that's match
     1. open
     2. search name
         3. get needed tags
         4. make dict
-    5. make list
+    5. make list of needed poi's
 
     """
-    osm_file_name = './map.osm'
-    osm_file = open(osm_file_name, 'r')
-    iteration = 0
-    for _, element in etree.iterparse(osm_file):
-        # element = the osm object (node, line, ...)
-        iteration += 1
-        print iteration
-        if iteration == 8470:
-            pass
-        print element.get('id'), element.tag
-        if len(element.findall('tag')):
-            # element has tags - search needed items
-            for key_tag in element.findall(u'.//tag[@k="name"][@v="Пятёрочка"]'):
-                # we find 'tag' - this is required poi.
-                # get his id and children's tags
-                poi = {'id': element.get('id'), key_tag.get('k'): key_tag.get('v')}
-                for tag in element:
-                    # look every tag, get needed (that is in pattern)
-                    for attribute in pattern:
-                        if tag.get('k') == attribute[0]:
-                            poi[attribute[0]] = tag.get('v')
-                print poi
-        element.clear()
 
-    poi_id = []
-    return poi_id
+    query = u'.//tag[@k="{key}"][@v="{value}"]'.format(key=pattern[0][0],
+                                                       value=pattern[0][1])
+    osm_file_name = './map.osm'
+    osm_file = open(osm_file_name, 'r').read()
+    element = etree.fromstring(osm_file)
+
+    poi_list = []
+    #TODO: make search from children of <osm>, not from <osm>???
+    #TODO: make search with inaccurate match ????
+    for poi_tag in element:
+        # get every element and search for needed tags
+        for key_tag in poi_tag.findall(query):
+            # we find 'tag' - this is required poi.
+            # get his id and children's tags
+            poi = {'id': poi_tag.get('id'), key_tag.get('k'): key_tag.get('v')}
+            for tag in poi_tag:
+                # look every tag, get needed (that is in pattern)
+                for attribute in pattern:
+                    if tag.get('k') == attribute[0]:
+                        poi[attribute[0]] = tag.get('v')
+            poi_list.append(poi)
+    print poi_list
+    return poi_list
 
 
 def parse_id(id):
@@ -103,7 +98,6 @@ def parse_id(id):
     poi_list = []
     return poi_list
 
-pattern = ['name', u'Пятёрочка'], ['shop', 'convenience'], ['tag2', 'value2'], ['tag3', 'value3']
 
 if __name__ == '__main__':
     name_search()
