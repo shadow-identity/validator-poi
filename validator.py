@@ -5,10 +5,26 @@ highlighted tag values that does not match the pattern
 """
 
 #TODO: web form to get all the data
+#TODO: config parser
+#TODO: link to load JOSM
 
 from lxml import etree
 import lxml.html
 from lxml.html import builder as E
+
+
+def create_josm_url(poi):
+    id = poi.get('id')
+    tag = poi.tag
+    if tag == 'node':
+        url_id = 'n' + id
+    elif tag == 'way':
+        url_id = 'w' + id
+    elif tag == 'relation':
+        url_id = 'r' + id
+    else:
+        url_id = 'OBJECT {tag} ERROR'.format(tag=tag)
+    return 'http://localhost:8111/load_object?objects=' + url_id
 
 
 def generate_html(pattern, poi_list):
@@ -21,6 +37,8 @@ def generate_html(pattern, poi_list):
         # generate header of table which contains all given keys
         th_header = etree.SubElement(tr_header, 'th')
         th_header.text = key[0]
+    th_header = etree.SubElement(tr_header, 'th')
+    th_header.text = 'Edit in josm'
 
     for poi in poi_list:
         # generate element tree of poi
@@ -33,6 +51,11 @@ def generate_html(pattern, poi_list):
                 # if value not equal to pattern, mark it bold
                 b = etree.SubElement(td, 'b')
                 b.text = poi.get(key[0])
+        td = etree.SubElement(tr, 'td')
+        link = etree.SubElement(td, 'a')
+        link.set('href', poi['josm_url'])
+        link.text = 'Edit'
+
 
     html = E.HTML(
         E.HEAD(
@@ -42,7 +65,9 @@ def generate_html(pattern, poi_list):
         E.BODY(
             E.H1('Table of POI'),
             E.TABLE(
-                tbody
+                tbody,
+                cellspacing="0", cellpadding="10",  border="1",
+
             )
         )
     )
@@ -80,6 +105,7 @@ def name_search(pattern, osm_file_name):
                 for attribute in pattern:
                     if tag.get('k') == attribute[0]:
                         poi[attribute[0]] = tag.get('v')
+            poi['josm_url'] = create_josm_url(poi_tag)
             poi_list.append(poi)
     return poi_list
 
@@ -93,5 +119,8 @@ def parse_id(id):
 
 
 if __name__ == '__main__':
-    name_search()
+    osm_file = open('test/create_urls_test.osm', 'r').read()
+    element = etree.fromstring(osm_file)
+    for poi in element:
+        create_josm_url(poi)
 

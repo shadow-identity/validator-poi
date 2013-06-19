@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' upload='true' generator='JOSM'>
+  <node id='1891418809' timestamp='2013-05-31T20:39:45Z' uid='9731' user='Ambush' visible='true' version='4' changeset='16370659' lat='59.559628' lon='30.0908233'>
+    <tag k='name' v='Пятёрочка' />
+    <tag k='payment:credit_cards' v='yes' />
+    <tag k='shop' v='convenience' />
+  </node>
+  <way id='62128239' timestamp='2012-08-31T12:41:37Z' uid='9731' user='Ambush' visible='true' version='4' changeset='12930510'>
+    <nd ref='775145756' />
+    <nd ref='775145758' />
+    <nd ref='775145795' />
+    <nd ref='775145797' />
+    <nd ref='775145756' />
+    <tag k='addr:city' v='Гатчина' />
+    <tag k='addr:country' v='RU' />
+    <tag k='addr:housenumber' v='17' />
+    <tag k='addr:state' v='Ленинградская область' />
+    <tag k='addr:street' v='улица Авиатриссы Зверевой' />
+    <tag k='building' v='apartments' />
+  </way>
+  <relation id='1861067' timestamp='2011-11-24T07:10:35Z' uid='9731' user='Ambush' visible='true' version='1' changeset='9930194'>
+    <member type='way' ref='138206193' role='outer' />
+    <member type='way' ref='62128351' role='outer' />
+    <tag k='building' v='yes' />
+    <tag k='type' v='multipolygon' />
+  </relation>
+</osm>
