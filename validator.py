@@ -36,6 +36,7 @@ def generate_html(pattern, poi_list):
 
     html = E.HTML(
         E.HEAD(
+            E.META(content="text/html; charset=utf-8"),
             E.TITLE('Table of POI')
         ),
         E.BODY(
@@ -50,12 +51,7 @@ def generate_html(pattern, poi_list):
     return lxml.html.tostring(html, pretty_print=True)
 
 
-def name_search(pattern=(['name', u'Пятёрочка'],
-                         ['shop', 'convenience'],
-                         ['operator', 'X5 Retail Group'],
-                         ['tag3', 'value3']),
-                ):
-    #TODO: get garbage out, make unit-test
+def name_search(pattern, osm_file_name):
     """
     Search name or similar names in osm_data, returns list of ElementTree objects that's match
     1. open
@@ -68,12 +64,10 @@ def name_search(pattern=(['name', u'Пятёрочка'],
 
     query = u'.//tag[@k="{key}"][@v="{value}"]'.format(key=pattern[0][0],
                                                        value=pattern[0][1])
-    osm_file_name = './map.osm'
     osm_file = open(osm_file_name, 'r').read()
     element = etree.fromstring(osm_file)
 
     poi_list = []
-    #TODO: make search from children of <osm>, not from <osm>???
     #TODO: make search with inaccurate match ????
     for poi_tag in element:
         # get every element and search for needed tags
@@ -87,7 +81,6 @@ def name_search(pattern=(['name', u'Пятёрочка'],
                     if tag.get('k') == attribute[0]:
                         poi[attribute[0]] = tag.get('v')
             poi_list.append(poi)
-    print poi_list
     return poi_list
 
 
