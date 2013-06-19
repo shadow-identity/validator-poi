@@ -13,6 +13,19 @@ import lxml.html
 from lxml.html import builder as E
 
 
+def read_config(file_name='validator.cfg'):
+    config = open(file_name, 'r').read().splitlines()
+    pattern = []
+    for line in config:
+        item = line.split(':')
+        if len(item) != 2:
+            print 'invalid config file'
+            return
+        item[0], item[1] = item[0].strip(), item[1].strip()
+        pattern.append(item)
+    return pattern
+
+
 def create_josm_url(poi):
     id = poi.get('id')
     tag = poi.tag
@@ -72,7 +85,7 @@ def generate_html(pattern, poi_list):
         )
     )
 
-    lxml.html.open_in_browser(html)
+    #lxml.html.open_in_browser(html)
     return lxml.html.tostring(html, pretty_print=True)
 
 
@@ -87,7 +100,7 @@ def name_search(pattern, osm_file_name):
 
     """
 
-    query = u'.//tag[@k="{key}"][@v="{value}"]'.format(key=pattern[0][0],
+    query = './/tag[@k="{key}"][@v="{value}"]'.format(key=pattern[0][0],
                                                        value=pattern[0][1])
     osm_file = open(osm_file_name, 'r').read()
     element = etree.fromstring(osm_file)
@@ -119,8 +132,16 @@ def parse_id(id):
 
 
 if __name__ == '__main__':
+    pattern = read_config()
+    print pattern
+
+    poi_list = name_search(pattern, 'map.osm')
+    generate_html(pattern, poi_list)
+
+
+    '''
     osm_file = open('test/create_urls_test.osm', 'r').read()
     element = etree.fromstring(osm_file)
     for poi in element:
         create_josm_url(poi)
-
+    '''
