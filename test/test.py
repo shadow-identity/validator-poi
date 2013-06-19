@@ -25,11 +25,13 @@ class MyTestCase(unittest.TestCase):
         result = name_search(self.pattern, self.osm_file_name)
         needed = [{'shop': 'convenience',
                    'id': '1891418809',
-                   'name': '\u041f\u044f\u0442\u0451\u0440\u043e\u0447\u043a\u0430',
+                   #'name': '\u041f\u044f\u0442\u0451\u0440\u043e\u0447\u043a\u0430',
+                   'name': 'Пятёрочка',
                    'josm_url': 'http://localhost:8111/load_object?objects=n1891418809'},
                   {'shop': 'convenience',
                    'id': '2327568854',
-                   'name': '\u041f\u044f\u0442\u0451\u0440\u043e\u0447\u043a\u0430',
+                   #'name': '\u041f\u044f\u0442\u0451\u0440\u043e\u0447\u043a\u0430',
+                   'name': 'Пятерочка',
                    'josm_url': 'http://localhost:8111/load_object?objects=n2327568854'}]
         self.assertEqual(result, needed)
 
