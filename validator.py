@@ -2,6 +2,15 @@
 """
 That validator search similar named poi's and returns table which contains
 highlighted tag values that does not match the pattern
+
+Validator looks into validator.cfg config for parameters. Format of config file:
+name_of_file_with_osm_xml_data
+tag_that_will_be_searched : needed_value_(case_sensitive)
+other_tag : his_value
+other_tag : his_value
+etc
+
+Script returns html file to stdout and starts web-browser to show result
 """
 
 #TODO: web form to get all the data
@@ -122,4 +131,5 @@ def name_search(pattern, osm_file_name):
 if __name__ == '__main__':
     pattern, osm_file = read_config()
     poi_list = name_search(pattern, osm_file)
-    generate_html(pattern, poi_list)
+    print generate_html(pattern, poi_list)
+
