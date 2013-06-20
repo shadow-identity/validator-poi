@@ -5,12 +5,20 @@ highlighted tag values that does not match the pattern
 """
 
 #TODO: web form to get all the data
-#TODO: config parser
-#TODO: link to load JOSM
 
 from lxml import etree
 import lxml.html
 from lxml.html import builder as E
+
+
+def read_config(file_name='validator.cfg'):
+    config = open(file_name, 'r').read().splitlines()
+    pattern = []
+    for line in config:
+        item = line.rsplit(':')
+        item[0], item[1] = item[0].strip(), item[1].strip().decode('utf-8')
+        pattern.append(item)
+    return pattern
 
 
 def create_josm_url(poi):
@@ -55,7 +63,6 @@ def generate_html(pattern, poi_list):
         link = etree.SubElement(td, 'a')
         link.set('href', poi['josm_url'])
         link.text = 'Edit'
-
 
     html = E.HTML(
         E.HEAD(
@@ -110,17 +117,7 @@ def name_search(pattern, osm_file_name):
     return poi_list
 
 
-def parse_id(id):
-    """
-    Parse id, turn it to dict with only needed keys
-    """
-    poi_list = []
-    return poi_list
-
-
 if __name__ == '__main__':
-    osm_file = open('test/create_urls_test.osm', 'r').read()
-    element = etree.fromstring(osm_file)
-    for poi in element:
-        create_josm_url(poi)
-
+    pattern = read_config()
+    poi_list = name_search(pattern, 'map.osm')
+    generate_html(pattern, poi_list)

@@ -10,6 +10,7 @@
     <tag k='name' v='Пятёрочка' />
     <tag k='payment:credit_cards' v='yes' />
     <tag k='shop' v='convenience' />
+    <tag k='operator' v='X3 Retail Group' />
   </node>
   <node id='1891418814' timestamp='2013-05-31T20:39:45Z' uid='9731' user='Ambush' visible='true' version='3' changeset='16370659' lat='59.5635212' lon='30.0935008'>
     <tag k='name' v='Риомаг' />
@@ -24,7 +25,7 @@
   <node id='2327568854' timestamp='2013-05-31T20:39:45Z' uid='9731' user='Ambush' visible='true' version='1' changeset='16370659' lat='59.5622057' lon='30.0862812'>
     <tag k='name' v='Пятёрочка' />
     <tag k='payment:credit_cards' v='yes' />
-    <tag k='shop' v='convenience' />
+    <tag k='shop' v='supermarket' />
   </node>
   <node id='2328298415' timestamp='2013-06-01T17:17:18Z' uid='1313454' user='Localknowledge' visible='true' version='1' changeset='16380488' lat='59.5615586' lon='30.1000909' />
   <node id='2328298416' timestamp='2013-06-01T17:17:18Z' uid='1313454' user='Localknowledge' visible='true' version='1' changeset='16380488' lat='59.5614676' lon='30.1002438' />
