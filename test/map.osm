@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' upload='true' generator='JOSM'>
+  <bounds minlat='59.5539824' minlon='30.0823689' maxlat='59.5642017' maxlon='30.1015091' origin='CGImap 0.1.0' />
+  <node id='158708610' timestamp='2012-08-19T13:16:53Z' uid='392109' user='GaM' visible='true' version='2' changeset='12783426' lat='59.5548911' lon='30.1090876' />
+  <node id='158708612' timestamp='2012-08-19T13:16:53Z' uid='392109' user='GaM' visible='true' version='2' changeset='12783426' lat='59.5552801' lon='30.1089336' />
+  <node id='158708614' timestamp='2012-08-19T13:16:54Z' uid='392109' user='GaM' visible='true' version='2' changeset='12783426' lat='59.5554634' lon='30.1088385' />
+  <node id='158708618' timestamp='2012-08-19T13:16:54Z' uid='392109' user='GaM' visible='true' version='2' changeset='12783426' lat='59.5558368' lon='30.108612' />
+  <node id='158708620' timestamp='2012-11-15T03:03:20Z' uid='133332' user='AMDmi3' visible='true' version='3' changeset='13878961' lat='59.5561167' lon='30.1084443' />
+  <node id='1891418809' timestamp='2013-05-31T20:39:45Z' uid='9731' user='Ambush' visible='true' version='4' changeset='16370659' lat='59.559628' lon='30.0908233'>
+    <tag k='name' v='Пятёрочка' />
+    <tag k='payment:credit_cards' v='yes' />
+    <tag k='shop' v='convenience' />
+    <tag k='operator' v='X3 Retail Group' />
+  </node>
+  <node id='1891418814' timestamp='2013-05-31T20:39:45Z' uid='9731' user='Ambush' visible='true' version='3' changeset='16370659' lat='59.5635212' lon='30.0935008'>
+    <tag k='name' v='Риомаг' />
+    <tag k='payment:credit_cards' v='yes' />
+    <tag k='shop' v='convenience' />
+  </node>
+  <node id='1891418819' timestamp='2012-09-17T06:34:40Z' uid='9731' user='Ambush' visible='true' version='3' changeset='13139051' lat='59.5640434' lon='30.0923632'>
+    <tag k='name' v='Розовый кролик' />
+    <tag k='operator' v='Розовый кролик' />
+    <tag k='shop' v='erotic' />
+  </node>
+  <node id='2327568854' timestamp='2013-05-31T20:39:45Z' uid='9731' user='Ambush' visible='true' version='1' changeset='16370659' lat='59.5622057' lon='30.0862812'>
+    <tag k='name' v='Пятёрочка' />
+    <tag k='payment:credit_cards' v='yes' />
+    <tag k='shop' v='supermarket' />
+  </node>
+  <node id='2328298415' timestamp='2013-06-01T17:17:18Z' uid='1313454' user='Localknowledge' visible='true' version='1' changeset='16380488' lat='59.5615586' lon='30.1000909' />
+  <node id='2328298416' timestamp='2013-06-01T17:17:18Z' uid='1313454' user='Localknowledge' visible='true' version='1' changeset='16380488' lat='59.5614676' lon='30.1002438' />
+  <way id='62128239' timestamp='2012-08-31T12:41:37Z' uid='9731' user='Ambush' visible='true' version='4' changeset='12930510'>
+    <nd ref='775145756' />
+    <nd ref='775145758' />
+    <nd ref='775145795' />
+    <nd ref='775145797' />
+    <nd ref='775145756' />
+    <tag k='addr:city' v='Гатчина' />
+    <tag k='addr:country' v='RU' />
+    <tag k='addr:housenumber' v='17' />
+    <tag k='addr:state' v='Ленинградская область' />
+    <tag k='addr:street' v='улица Авиатриссы Зверевой' />
+    <tag k='building' v='apartments' />
+  </way>
+  <way id='62128241' timestamp='2012-08-31T12:41:36Z' uid='9731' user='Ambush' visible='true' version='3' changeset='12930510'>
+    <nd ref='775145799' />
+    <nd ref='775145801' />
+    <nd ref='775145803' />
+    <nd ref='775145805' />
+    <nd ref='775145799' />
+    <tag k='addr:city' v='Гатчина' />
+    <tag k='addr:country' v='RU' />
+    <tag k='addr:housenumber' v='15' />
+    <tag k='addr:state' v='Ленинградская область' />
+    <tag k='addr:street' v='улица Авиатриссы Зверевой' />
+    <tag k='building' v='apartments' />
+  </way>
+  <relation id='1861065' timestamp='2011-11-24T07:10:34Z' uid='9731' user='Ambush' visible='true' version='1' changeset='9930194'>
+    <member type='way' ref='138206203' role='outer' />
+    <member type='way' ref='138206206' role='outer' />
+    <member type='way' ref='138206240' role='outer' />
+    <member type='way' ref='138206204' role='outer' />
+    <tag k='natural' v='wood' />
+    <tag k='type' v='multipolygon' />
+  </relation>
+  <relation id='1861066' timestamp='2011-11-24T07:10:34Z' uid='9731' user='Ambush' visible='true' version='1' changeset='9930194'>
+    <member type='way' ref='62128039' role='outer' />
+    <member type='way' ref='138206182' role='outer' />
+    <tag k='building' v='yes' />
+    <tag k='man_made' v='works' />
+    <tag k='type' v='multipolygon' />
+  </relation>
+  <relation id='1861067' timestamp='2011-11-24T07:10:35Z' uid='9731' user='Ambush' visible='true' version='1' changeset='9930194'>
+    <member type='way' ref='138206193' role='outer' />
+    <member type='way' ref='62128351' role='outer' />
+    <tag k='building' v='yes' />
+    <tag k='type' v='multipolygon' />
+  </relation>
+</osm>

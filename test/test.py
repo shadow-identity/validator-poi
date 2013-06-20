@@ -48,11 +48,11 @@ class MyTestCase(unittest.TestCase):
 
     def test_config_parser(self):
         result = read_config(self.config_file_name)
-        needed = self.pattern
+        needed = self.pattern, self.osm_file_name
         self.assertEqual(result, needed)
 
     def test_global(self):
-        pattern = read_config(self.config_file_name)
+        pattern, _ = read_config(self.config_file_name)
         poi_list = name_search(pattern, self.osm_file_name)
         result = generate_html(pattern, poi_list)
         needed = open(self.needed_html, 'r').read()

@@ -13,12 +13,14 @@ from lxml.html import builder as E
 
 def read_config(file_name='validator.cfg'):
     config = open(file_name, 'r').read().splitlines()
+    osm_file = config[0]
     pattern = []
     for line in config:
         item = line.rsplit(':')
-        item[0], item[1] = item[0].strip(), item[1].strip().decode('utf-8')
-        pattern.append(item)
-    return pattern
+        if len(item) == 2:
+            item[0], item[1] = item[0].strip(), item[1].strip().decode('utf-8')
+            pattern.append(item)
+    return pattern, osm_file
 
 
 def create_josm_url(poi):
@@ -118,6 +120,6 @@ def name_search(pattern, osm_file_name):
 
 
 if __name__ == '__main__':
-    pattern = read_config()
-    poi_list = name_search(pattern, 'map.osm')
+    pattern, osm_file = read_config()
+    poi_list = name_search(pattern, osm_file)
     generate_html(pattern, poi_list)
